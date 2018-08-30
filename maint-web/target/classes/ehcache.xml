@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache name="es" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="false">
+
+    <diskStore path="java.io.tmpdir" />
+     
+     <cache name="dictCache"
+    	   maxElementsInMemory="2000"
+    	   eternal="false"
+           timeToIdleSeconds="600"
+           timeToLiveSeconds="600"
+           overflowToDisk="false"
+           statistics="true">
+    </cache>
+    
+     <cache name="authCache"
+    	   maxElementsInMemory="2000"
+    	   eternal="false"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="300"
+           overflowToDisk="false"
+           statistics="true">
+    </cache>
+    <cache name="tool"
+	      maxElementsInMemory="86400" 
+	      eternal="false"
+	      diskPersistent="true"
+	      timeToIdleSeconds="300" 
+	      timeToLiveSeconds="600" 
+	      overflowToDisk="true" />
+</ehcache>

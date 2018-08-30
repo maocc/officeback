@@ -1,0 +1,81 @@
+spring:
+    profiles: 
+        active: dev
+    application: 
+        name: maint_app
+    datasource: 
+        type: com.alibaba.druid.pool.DruidDataSource
+        url: jdbc:mysql://10.10.8.57:3306/manit?characterEncoding=UTF-8&autoReconnect=true&useSSL=false
+        username: root
+        password: feezu.cn123
+        driverClassName: com.mysql.jdbc.Driver
+      #\u6307\u5B9A\u542F\u52A8\u8FDE\u63A5\u6C60\u65F6\uFF0C\u521D\u59CB\u5EFA\u7ACB\u7684\u8FDE\u63A5\u6570\u91CF
+        initialSize: 3
+      #\u6307\u5B9A\u5FC5\u987B\u4FDD\u6301\u8FDE\u63A5\u7684\u6700\u5C0F\u503C
+        minIdle: 1
+        maxWait: 60000
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        testOnBorrow: true
+        validationQuery: SELECT 1
+        filters: stat,wall,log4j
+        connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    http:
+        multipart:
+            enabled: true
+            max-file-size: 5Mb
+            max-request-size: 50Mb
+mybatis:
+    mapper-locations: classpath:mybatis/*.xml
+
+management:
+    context-path: /manage
+
+
+#curl -X POST http://localhost:8089/manage/shutdown
+#启用shutdown 
+#关闭操作：curl -X POST host:port/manage/shutdown
+endpoints:
+    shutdown:
+        enabled: true
+#禁用密码验证
+        sensitive: false
+
+
+
+#fastdfs
+fastdfs: 
+  connect_timeout_in_seconds:  5
+  network_timeout_in_seconds:  30
+  charset:  UTF-8
+  http_anti_steal_token: false
+  http_secret_key: FastDFS1234567890
+  http_tracker_http_port: 80
+  max_active:  30
+  max_idle:  2
+  tracker_servers: 10.10.8.73:22122 
+
+
+
+server: 
+    port: 8089
+info: 
+    version: 0.0.1-SNAPSHOT
+
+gate:
+    ignore:
+        startWith: /static
+        contain: .
+    oauth:
+        prefix: /api
+  
+    jwt:
+        secret: Xe*g@1jda
+        expiration: 7200
+webservice:
+    host: https://test2.feezu.cn
+    
+application: 
+    webHost: http://localhost:8089
+#分组务器ID,一位字符0-9-a-z, 同一分组中相同,不同分组中唯一
+groupServerId: 1
